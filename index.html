@@ -1,622 +1,591 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #4689cc; -webkit-text-stroke: #4689cc}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #c27e65; -webkit-text-stroke: #c27e65}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #8cd3fe; -webkit-text-stroke: #8cd3fe}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca; min-height: 16.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #6d7378; -webkit-text-stroke: #6d7378}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #71c083; -webkit-text-stroke: #71c083}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #b76ff7; -webkit-text-stroke: #b76ff7}
-    span.s1 {font-kerning: none; background-color: #171818}
-    span.s2 {font-kerning: none; color: #8cd3fe; background-color: #171818; -webkit-text-stroke: 0px #8cd3fe}
-    span.s3 {font-kerning: none; color: #6d6d6d; background-color: #171818; -webkit-text-stroke: 0px #6d6d6d}
-    span.s4 {font-kerning: none; color: #4689cc; background-color: #171818; -webkit-text-stroke: 0px #4689cc}
-    span.s5 {font-kerning: none; color: #cacaca; background-color: #171818; -webkit-text-stroke: 0px #cacaca}
-    span.s6 {font-kerning: none; color: #c27e65; background-color: #171818; -webkit-text-stroke: 0px #c27e65}
-    span.s7 {font-kerning: none}
-    span.s8 {font-kerning: none; color: #d4d4d4; background-color: #171818; -webkit-text-stroke: 0px #d4d4d4}
-    span.s9 {font-kerning: none; color: #a7c598; background-color: #171818; -webkit-text-stroke: 0px #a7c598}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星野的繪圖小窩</title>
+    
+    <!-- 1. 引入 Tailwind CSS (樣式庫) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. 引入 React 和 ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    
+    <!-- 3. 引入 Babel (讓瀏覽器看懂 JSX) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- 4. 引入 Lucide Icons (圖示庫) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* 自定義樣式補充 */
+        body { font-family: "Helvetica Neue", Arial, "Heiti TC", sans-serif; }
+        .font-theme { font-weight: 300; letter-spacing: 0.1em; }
+        .glass-panel { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.8); }
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-content { display: flex; animation: scroll 40s linear infinite; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE</span><span class="s2"> html</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s3">&lt;</span><span class="s4">html</span><span class="s5"> </span><span class="s2">lang</span><span class="s3">=</span><span class="s1">"zh-TW"</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;</span><span class="s1">head</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">meta</span><span class="s5"> </span><span class="s1">charset</span><span class="s3">=</span><span class="s6">"UTF-8"</span><span class="s3">&gt;</span></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">meta</span><span class="s5"> </span><span class="s2">name</span><span class="s3">=</span><span class="s1">"viewport"</span><span class="s5"> </span><span class="s2">content</span><span class="s3">=</span><span class="s1">"width=device-width, initial-scale=1.0"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">title</span><span class="s3">&gt;</span><span class="s1">星野的繪圖小窩</span><span class="s3">&lt;/</span><span class="s4">title</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;!-- 1. 引入 Tailwind CSS (樣式庫) --&gt;</span></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">script</span><span class="s5"> </span><span class="s2">src</span><span class="s3">=</span><span class="s1">"https://cdn.tailwindcss.com"</span><span class="s3">&gt;&lt;/</span><span class="s4">script</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;!-- 2. 引入 React 和 ReactDOM --&gt;</span></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">script</span><span class="s5"> </span><span class="s2">src</span><span class="s3">=</span><span class="s1">"https://unpkg.com/react@18/umd/react.development.js"</span><span class="s5"> </span><span class="s2">crossorigin</span><span class="s3">&gt;&lt;/</span><span class="s4">script</span><span class="s3">&gt;</span></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">script</span><span class="s5"> </span><span class="s2">src</span><span class="s3">=</span><span class="s1">"https://unpkg.com/react-dom@18/umd/react-dom.development.js"</span><span class="s5"> </span><span class="s2">crossorigin</span><span class="s3">&gt;&lt;/</span><span class="s4">script</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;!-- 3. 引入 Babel (讓瀏覽器看懂 JSX) --&gt;</span></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">script</span><span class="s5"> </span><span class="s2">src</span><span class="s3">=</span><span class="s1">"https://unpkg.com/@babel/standalone/babel.min.js"</span><span class="s3">&gt;&lt;/</span><span class="s4">script</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;!-- 4. 引入 Lucide Icons (圖示庫) --&gt;</span></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">script</span><span class="s5"> </span><span class="s2">src</span><span class="s3">=</span><span class="s1">"https://unpkg.com/lucide@latest"</span><span class="s3">&gt;&lt;/</span><span class="s4">script</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p1"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s1">style</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s1">/* 自定義樣式補充 */</span></p>
-<p class="p7"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">body</span><span class="s5"> </span><span class="s8">{</span><span class="s5"> </span><span class="s2">font-family:</span><span class="s5"> </span><span class="s1">"Helvetica Neue"</span><span class="s8">,</span><span class="s5"> </span><span class="s6">Arial</span><span class="s8">,</span><span class="s5"> </span><span class="s1">"Heiti TC"</span><span class="s8">,</span><span class="s5"> </span><span class="s6">sans-serif</span><span class="s8">;</span><span class="s5"> </span><span class="s8">}</span></p>
-<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">.font-theme</span><span class="s5"> </span><span class="s8">{</span><span class="s5"> </span><span class="s1">font-weight:</span><span class="s5"> </span><span class="s9">300</span><span class="s8">;</span><span class="s5"> </span><span class="s1">letter-spacing:</span><span class="s5"> </span><span class="s9">0.1em</span><span class="s8">;</span><span class="s5"> </span><span class="s8">}</span></p>
-<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">.glass-panel</span><span class="s5"> </span><span class="s8">{</span><span class="s5"> </span><span class="s1">background:</span><span class="s5"> </span><span class="s6">rgba(</span><span class="s9">255</span><span class="s8">,</span><span class="s5"> </span><span class="s9">255</span><span class="s8">,</span><span class="s5"> </span><span class="s9">255</span><span class="s8">,</span><span class="s5"> </span><span class="s9">0.6</span><span class="s6">)</span><span class="s8">;</span><span class="s5"> </span><span class="s1">backdrop-filter:</span><span class="s5"> </span><span class="s6">blur(</span><span class="s9">12px</span><span class="s6">)</span><span class="s8">;</span><span class="s5"> </span><span class="s1">border:</span><span class="s5"> </span><span class="s9">1px</span><span class="s5"> </span><span class="s6">solid</span><span class="s5"> </span><span class="s6">rgba(</span><span class="s9">255</span><span class="s8">,</span><span class="s9">255</span><span class="s8">,</span><span class="s9">255</span><span class="s8">,</span><span class="s9">0.8</span><span class="s6">)</span><span class="s8">;</span><span class="s5"> </span><span class="s8">}</span></p>
-<p class="p8"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s1">@keyframes</span><span class="s5"> </span><span class="s6">scroll</span><span class="s5"> </span><span class="s8">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span></span><span class="s9">0%</span><span class="s1"> </span><span class="s8">{</span><span class="s1"> </span><span class="s2">transform:</span><span class="s1"> </span><span class="s6">translateX(</span><span class="s9">0</span><span class="s6">)</span><span class="s8">;</span><span class="s1"> </span><span class="s8">}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span></span><span class="s9">100%</span><span class="s1"> </span><span class="s8">{</span><span class="s1"> </span><span class="s2">transform:</span><span class="s1"> </span><span class="s6">translateX(</span><span class="s9">-50%</span><span class="s6">)</span><span class="s8">;</span><span class="s1"> </span><span class="s8">}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s8">}</span></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">.marquee-content</span><span class="s5"> </span><span class="s8">{</span><span class="s5"> </span><span class="s2">display:</span><span class="s5"> </span><span class="s1">flex</span><span class="s8">;</span><span class="s5"> </span><span class="s2">animation:</span><span class="s5"> </span><span class="s1">scroll</span><span class="s5"> </span><span class="s9">40s</span><span class="s5"> </span><span class="s1">linear</span><span class="s5"> </span><span class="s1">infinite</span><span class="s8">;</span><span class="s5"> </span><span class="s8">}</span></p>
-<p class="p1"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s1">.hide-scrollbar::-webkit-scrollbar</span><span class="s5"> </span><span class="s8">{</span><span class="s5"> </span><span class="s2">display:</span><span class="s5"> </span><span class="s6">none</span><span class="s8">;</span><span class="s5"> </span><span class="s8">}</span></p>
-<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">.hide-scrollbar</span><span class="s5"> </span><span class="s8">{</span><span class="s5"> </span><span class="s1">-ms-overflow-style:</span><span class="s5"> </span><span class="s6">none</span><span class="s8">;</span><span class="s5"> </span><span class="s1">scrollbar-width:</span><span class="s5"> </span><span class="s6">none</span><span class="s8">;</span><span class="s5"> </span><span class="s8">}</span></p>
-<p class="p1"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;/</span><span class="s1">style</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;/</span><span class="s1">head</span><span class="s3">&gt;</span></p>
-<p class="p2"><span class="s3">&lt;</span><span class="s4">body</span><span class="s5"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"bg-[#F9F9F9] text-slate-600 font-sans selection:bg-slate-200 selection:text-slate-800"</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">div</span><span class="s5"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"root"</span><span class="s3">&gt;&lt;/</span><span class="s4">div</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p2"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s4">script</span><span class="s5"> </span><span class="s2">type</span><span class="s3">=</span><span class="s1">"text/babel"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// ------------------------------------------------------------</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 1. 設定區</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// ------------------------------------------------------------</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const { useState, useEffect, useCallback, useRef } = React;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 圖示轉換器 (將 React 圖示轉為 Lucide Vanilla SVG)</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Icon = ({ name, ...props }) =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const iconName = name;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>// 確保 lucide 已經載入</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>if (!window.lucide || !window.lucide.icons[iconName]) return null;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>// 產生 SVG HTML</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const svgString = window.lucide.icons[iconName].toSVG(props);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>return &lt;span dangerouslySetInnerHTML={{ __html: svgString }} style={{ display: 'inline-flex', alignItems: 'center' }} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 定義會用到的圖示組件</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Palette = (p) =&gt; &lt;Icon name="palette" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const List = (p) =&gt; &lt;Icon name="list" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Image = (p) =&gt; &lt;Icon name="image" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const FileText = (p) =&gt; &lt;Icon name="fileText" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const User = (p) =&gt; &lt;Icon name="user" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Heart = (p) =&gt; &lt;Icon name="heart" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Sparkles = (p) =&gt; &lt;Icon name="sparkles" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const CheckCircle2 = (p) =&gt; &lt;Icon name="checkCircle2" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const AlertCircle = (p) =&gt; &lt;Icon name="alertCircle" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Mail = (p) =&gt; &lt;Icon name="mail" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Instagram = (p) =&gt; &lt;Icon name="instagram" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Twitter = (p) =&gt; &lt;Icon name="twitter" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const RefreshCw = (p) =&gt; &lt;Icon name="refreshCw" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const LayoutGrid = (p) =&gt; &lt;Icon name="layoutGrid" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Smile = (p) =&gt; &lt;Icon name="smile" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const PenTool = (p) =&gt; &lt;Icon name="penTool" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const ChevronRight = (p) =&gt; &lt;Icon name="chevronRight" {...p} /&gt;;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const Donut = (p) =&gt; &lt;Icon name="donut" {...p} /&gt;;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// --- Google Sheets 設定 ---</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1O7HyFnZuDqmtCl6Xx-DOGUfkiYU3N5bh6RxOAUpGPhUIM_MUGpp2eUoi02D3nJ7pGDs3bMMmeFov/pub?gid=1522759652&amp;single=true&amp;output=csv";<span class="Apple-converted-space"> </span></span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 預設範例資料</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const DEFAULT_QUEUE = [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 1, name: "範例-K***", status: "草稿確認中", progress: 30 },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 2, name: "範例-M***", status: "線稿繪製中", progress: 60 },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 3, name: "範例-S***", status: "上色完稿中", progress: 90 },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>];</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 作品集分類與詳細項目</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const portfolioCategories = [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>id: 'normal',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>name: '正比',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>items: [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: '正比頭貼',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 5,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'blue'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: '正比半身',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 4,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'slate'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: '全身立繪',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 4,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'teal'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>]<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>id: 'chibi',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>name: 'Ｑ版',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>items: [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Ｑ版頭貼',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 6,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'rose'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Ｑ版全身',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>"https://images.plurk.com/1PV4qjhyqgQ3JlrGmz784g.jpg",</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>"https://images.plurk.com/4Jw62PCKlw0eyEPAbxmtMF.jpg",</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>"https://images.plurk.com/6Bj4OTxzAb8W8gNaZ0ZKXu.jpg",</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>"https://images.plurk.com/2K5GNk3hX3mwx1RDA2VQc4.jpg"</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 5,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'orange'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: '服裝設計',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 4,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'indigo'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>]<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>id: 'other',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>name: '其他',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>items: [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: '簡單線條',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 5,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'gray'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: '黑白塗鴉',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 4,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'stone'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>title: '貼圖設計',<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>urls: [],<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>count: 6,<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colorTone: 'emerald'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>]<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>];</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 模擬作品圖片組件</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const ArtItem = ({ color, text, subText, imageUrl }) =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>return (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div className={`w-full h-full ${!imageUrl ? color : 'bg-slate-100'} flex flex-col items-center justify-center text-slate-600/70 rounded-2xl overflow-hidden relative group transition-all duration-300 hover:shadow-md`}&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>{imageUrl ? (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;img src={imageUrl} alt={text} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" /&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>) : (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;React.Fragment&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="absolute inset-0 bg-white/0 group-hover:bg-white/30 transition-all duration-500"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="absolute top-2 right-2 opacity-30 group-hover:opacity-60 transition-opacity"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;Sparkles size={16} /&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span className="text-xs tracking-widest font-light z-10"&gt;{text}&lt;/span&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>{subText &amp;&amp; &lt;span className="text-[10px] opacity-60 mt-1 tracking-wider z-10"&gt;{subText}&lt;/span&gt;}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/React.Fragment&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>)}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>{imageUrl &amp;&amp; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>)}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 價目表資料</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const priceList = [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>category: "正比系列",</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>items: [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "正比頭貼", price: "NT. 1000+", desc: "精緻全彩 / 含簡易裝飾", tags: ["頭貼", "精緻"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "正比半身", price: "NT. 2000+", desc: "腰部以上 / 動作可指定", tags: ["插圖", "氛圍"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "全身立繪", price: "NT. 3500+", desc: "包含角色設計 / 完整細節", tags: ["立繪", "設計"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>]</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>category: "Ｑ版系列",</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>items: [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "Ｑ版頭貼", price: "NT. 500+", desc: "可愛大頭 / 適合社群", tags: ["可愛", "大頭"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "Ｑ版全身", price: "NT. 1200+", desc: "二頭身或三頭身", tags: ["全身", "動態"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "服裝設計", price: "NT. 2500+", desc: "Ｑ版素體 / 含三視圖", tags: ["拆分", "設計"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>]</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>category: "其他項目",</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>items: [</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "簡單線條", price: "NT. 300+", desc: "單色線條 / 簡單上色", tags: ["極簡", "快速"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "黑白塗鴉", price: "NT. 800+", desc: "正比隨筆 / 氛圍感", tags: ["塗鴉", "黑白"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "貼圖", price: "NT. 1500+", desc: "靜態貼圖 / 一組 8 張", tags: ["實用", "貼圖"] },</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>]</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>];</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 輔助函式：根據色調產生顏色</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const getColorClass = (tone, index) =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const intensities = [100, 200, 50, 300, 100, 200];<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const intensity = intensities[index % intensities.length];</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const map = {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>blue: `bg-blue-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>slate: `bg-slate-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>teal: `bg-teal-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>rose: `bg-rose-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>orange: `bg-orange-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>indigo: `bg-indigo-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>gray: `bg-gray-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>stone: `bg-stone-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>emerald: `bg-emerald-${intensity}`,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>return map[tone] || `bg-slate-${intensity}`;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// ------------------------------------------------------------</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 2. 主組件</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// ------------------------------------------------------------</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>function ArtistPortfolio() {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const [activeSection, setActiveSection] = useState('home');</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const [queueData, setQueueData] = useState(DEFAULT_QUEUE);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const [isLoadingQueue, setIsLoadingQueue] = useState(false);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const [fetchError, setFetchError] = useState(null);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const [activePortfolioTab, setActivePortfolioTab] = useState('normal');</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>// 讀取 Google Sheet (包含重試機制)</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const fetchSheet = useCallback(async () =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>if (!SHEET_CSV_URL) return;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>setIsLoadingQueue(true);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>setFetchError(null);</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>const parseCSV = (text) =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>const rows = text.split(/\r?\n/).slice(1);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>return rows.map((row, index) =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>const cols = row.split(',');</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>if (cols.length &lt; 3) return null;<span class="Apple-converted-space"> </span></span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>const name = cols[0]?.trim();</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>const status = cols[1]?.trim();</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>const progressString = cols[2]?.trim().replace('%', '');</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>const progress = parseInt(progressString) || 0;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>if (!name) return null;<span class="Apple-converted-space"> </span></span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>return {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>id: index + 1,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>name: name,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>status: status,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>progress: progress</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>};</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>}).filter(Boolean);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>try {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>const timestamp = new Date().getTime();</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>const separator = SHEET_CSV_URL.includes('?') ? '&amp;' : '?';</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>const urlWithTimestamp = `${SHEET_CSV_URL}${separator}_t=${timestamp}`;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>let response;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>try {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>const proxyUrlPrimary = `https://api.allorigins.win/raw?url=${encodeURIComponent(urlWithTimestamp)}`;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>response = await fetch(proxyUrlPrimary);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>if (!response.ok) throw new Error("Primary proxy failed");</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>} catch (err) {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>const proxyUrlSecondary = `https://corsproxy.io/?${encodeURIComponent(urlWithTimestamp)}`;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>response = await fetch(proxyUrlSecondary);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>if (!response || !response.ok) throw new Error("All proxies failed");</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>const text = await response.text();</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>const parsedData = parseCSV(text);</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>if (parsedData.length &gt; 0) {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>setQueueData(parsedData);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>} catch (error) {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>console.error("無法讀取排單表:", error);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>setFetchError("暫時無法同步雲端，目前顯示範例");</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>} finally {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>setIsLoadingQueue(false);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>}, []);</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>useEffect(() =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>fetchSheet();</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>}, [fetchSheet]);</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>const scrollTo = (id) =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>const element = document.getElementById(id);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>if (element) {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>element.scrollIntoView({ behavior: 'smooth' });</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>setActiveSection(id);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>return (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{/* 導航列 */}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-center"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="glass-panel rounded-full px-8 py-3 shadow-sm shadow-slate-200/30 flex items-center gap-8 text-xs font-theme text-slate-500 overflow-x-auto max-w-full"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onClick={() =&gt; scrollTo('home')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap"&gt;主頁&lt;/button&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onClick={() =&gt; scrollTo('about')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap"&gt;關於&lt;/button&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onClick={() =&gt; scrollTo('portfolio')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap"&gt;範例&lt;/button&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span className="text-slate-300 hidden md:flex items-center justify-center"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;Donut size={14} strokeWidth={2} /&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/span&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onClick={() =&gt; scrollTo('pricing')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap"&gt;價目&lt;/button&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onClick={() =&gt; scrollTo('status')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap"&gt;排單&lt;/button&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onClick={() =&gt; scrollTo('terms')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap"&gt;須知&lt;/button&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/nav&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{/* 1. 主視覺 (Hero) */}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;header id="home" className="pt-28 pb-12 overflow-hidden flex flex-col items-center justify-center min-h-[60vh]"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="text-center mb-10 space-y-3"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="inline-block px-3 py-1 rounded-full bg-[#EFF2F1] text-[#6A857D] text-[10px] tracking-[0.2em] font-medium border border-[#E5EBE9]"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>ILLUSTRATION &amp; DESIGN</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h1 className="text-3xl md:text-4xl font-light tracking-[0.15em] text-slate-700"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>星野的繪圖小窩</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/h1&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p className="text-xs text-slate-500 tracking-widest font-light"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>用畫筆捕捉生活中的溫柔與色彩</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>{/* 跑馬燈 */}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="w-full relative py-4"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#F9F9F9] to-transparent z-10"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#F9F9F9] to-transparent z-10"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="w-full overflow-hidden whitespace-nowrap"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="marquee-content gap-4 px-4"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>{[...Array(2)].map((_, i) =&gt; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div key={i} className="flex gap-4"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-64 h-40 bg-[#E1E6EB] rounded-2xl flex-shrink-0"&gt;&lt;ArtItem color="bg-[#E1E6EB]" text="Artwork 01" /&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-64 h-40 bg-[#E1EBE8] rounded-2xl flex-shrink-0"&gt;&lt;ArtItem color="bg-[#E1EBE8]" text="Artwork 02" /&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-64 h-40 bg-[#E3E3EA] rounded-2xl flex-shrink-0"&gt;&lt;ArtItem color="bg-[#E3E3EA]" text="Artwork 03" /&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-64 h-40 bg-[#EBE3E3] rounded-2xl flex-shrink-0"&gt;&lt;ArtItem color="bg-[#EBE3E3]" text="Artwork 04" /&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-64 h-40 bg-[#EBE8E1] rounded-2xl flex-shrink-0"&gt;&lt;ArtItem color="bg-[#EBE8E1]" text="Artwork 05" /&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-64 h-40 bg-[#E1EBE4] rounded-2xl flex-shrink-0"&gt;&lt;ArtItem color="bg-[#E1EBE4]" text="Artwork 06" /&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>))}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/header&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{/* 2. 關於我 (About) */}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;section id="about" className="py-20 px-6 bg-white text-center"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="max-w-md mx-auto"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-slate-200 to-gray-200 p-1 mb-6"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="w-full h-full bg-white rounded-full overflow-hidden"&gt;&lt;ArtItem color="bg-[#F9F9F9]" text="ME" /&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2 className="text-lg font-light tracking-[0.2em] text-slate-600 mb-2"&gt;HOSHINO&lt;/h2&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p className="text-xs text-slate-500 tracking-widest font-light mb-8"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>喜歡甜點、貓咪與午後的陽光。&lt;br/&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>致力於畫出溫暖人心的作品。</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="flex justify-center gap-4"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#E5EBE9] hover:text-[#6F827D] hover:border-[#E5EBE9] transition-all hover:-translate-y-1"&gt;&lt;Twitter size={16} /&gt;&lt;/a&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#EBE6E6] hover:text-[#997A7A] hover:border-[#EBE6E6] transition-all hover:-translate-y-1"&gt;&lt;Instagram size={16} /&gt;&lt;/a&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#E6EBF0] hover:text-[#7A8C99] hover:border-[#E6EBF0] transition-all hover:-translate-y-1"&gt;&lt;Mail size={16} /&gt;&lt;/a&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/section&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{/* 3. 範例 */}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;section id="portfolio" className="py-20 px-6 bg-[#F9F9F9]"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="max-w-6xl mx-auto"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="flex flex-col items-center gap-6 mb-12"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h2 className="text-lg font-light tracking-widest text-slate-700"&gt;精選範例&lt;/h2&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                        </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="flex p-1 bg-slate-100 rounded-full"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>{portfolioCategories.map((cat) =&gt; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;button</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>key={cat.id}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>onClick={() =&gt; setActivePortfolioTab(cat.id)}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>className={`px-6 py-2 rounded-full text-xs tracking-widest transition-all duration-300 ${</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>activePortfolioTab === cat.id<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>? 'bg-white text-slate-700 shadow-sm font-medium'<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>: 'text-slate-400 hover:text-slate-600'</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>}`}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>{cat.name}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/button&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>))}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="space-y-12"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>{portfolioCategories.find(c =&gt; c.id === activePortfolioTab)?.items.map((subItem, idx) =&gt; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div key={idx} className="space-y-4"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="flex items-center gap-2 px-2"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-1 h-4 bg-slate-200 rounded-full"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 className="text-sm text-slate-600 tracking-widest font-medium"&gt;{subItem.title}&lt;/h3&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span className="text-[10px] text-slate-300 font-light ml-auto flex items-center gap-1"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>左右滑動查看 &lt;ChevronRight size={10} /&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/span&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                            </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="flex overflow-x-auto gap-4 pb-4 px-2 snap-x snap-mandatory hide-scrollbar"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>{(() =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>const hasImages = subItem.urls &amp;&amp; subItem.urls.length &gt; 0;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>const itemsToRender = hasImages ? subItem.urls : [...Array(subItem.count)];</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                                </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>return itemsToRender.map((itemContent, imgIndex) =&gt; {</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>const colorClass = getColorClass(subItem.colorTone, imgIndex);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>const widthClass = "min-w-[200px] w-[200px]";</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>const imageUrl = hasImages ? itemContent : null;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>return (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div key={imgIndex} className={`${widthClass} h-48 snap-center flex-shrink-0`}&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;ArtItem<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                        </span>color={colorClass}<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                        </span>text={subItem.title}<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                        </span>subText={`Sample ${String(imgIndex + 1).padStart(2, '0')}`}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                        </span>imageUrl={imageUrl}<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                    </span>/&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>});</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>})()}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>))}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/section&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{/* 4. 價目表 */}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;section id="pricing" className="py-20 px-6 max-w-5xl mx-auto bg-white"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="flex items-center gap-3 mb-12 justify-center"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2 className="text-lg font-light tracking-widest text-slate-700"&gt;委託項目&lt;/h2&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="space-y-16"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>{priceList.map((category, catIndex) =&gt; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div key={catIndex}&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="flex items-center justify-center gap-4 mb-8"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="h-px w-6 bg-slate-200"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 className="text-sm font-medium text-slate-500 tracking-[0.2em]"&gt;{category.category}&lt;/h3&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="h-px w-6 bg-slate-200"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="grid md:grid-cols-3 gap-8"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>{category.items.map((item, index) =&gt; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div key={index} className="group relative bg-white rounded-[2rem] p-8 border border-slate-100 hover:border-[#DCE6E2] transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/40"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white border border-slate-100 rounded-full flex items-center justify-center group-hover:bg-[#F2F5F4] group-hover:text-[#8FA39D] transition-colors"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>{catIndex === 0 &amp;&amp; &lt;LayoutGrid size={16} strokeWidth={1.5} className="text-slate-300 group-hover:text-[#8FA39D]" /&gt;}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>{catIndex === 1 &amp;&amp; &lt;Smile size={16} strokeWidth={1.5} className="text-slate-300 group-hover:text-[#8FA39D]" /&gt;}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>{catIndex === 2 &amp;&amp; &lt;PenTool size={16} strokeWidth={1.5} className="text-slate-300 group-hover:text-[#8FA39D]" /&gt;}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                                </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="text-center mt-4"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;h3 className="text-sm font-medium tracking-widest text-slate-700 mb-2"&gt;{item.title}&lt;/h3&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="text-xl font-light text-slate-800 font-sans mb-4"&gt;{item.price}&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="w-8 h-px bg-slate-200 mx-auto mb-4"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;p className="text-xs text-slate-500 mb-6 leading-relaxed min-h-[3em]"&gt;{item.desc}&lt;/p&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                                </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="flex flex-wrap gap-2 justify-center"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                    </span>{item.tags.map((tag, i) =&gt; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span key={i} className="px-2 py-1 rounded-md bg-[#F7F9F9] text-[10px] text-slate-500 tracking-wider"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                        </span>#{tag}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/span&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                    </span>))}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>))}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>))}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/section&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{/* 5. 排單狀態 */}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;section id="status" className="py-20 px-6 max-w-4xl mx-auto"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="flex items-center gap-3 mb-8 justify-center relative"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="h-px w-8 bg-slate-300"&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2 className="text-lg font-light tracking-widest text-slate-700"&gt;目前狀態&lt;/h2&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="h-px w-8 bg-slate-300"&gt;&lt;/div&gt;</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>onClick={fetchSheet}<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>disabled={isLoadingQueue}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>className="absolute right-0 md:-right-12 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-all"</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>title="重新整理排單"</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;RefreshCw size={14} className={isLoadingQueue ? "animate-spin text-[#7A9089]" : ""} /&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="grid md:grid-cols-3 gap-6"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="md:col-span-1 glass-panel rounded-3xl p-6 text-center space-y-4 flex flex-col justify-center items-center"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="w-16 h-16 mx-auto rounded-full bg-[#F0F4F3] flex items-center justify-center text-[#7A9089]"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;Sparkles size={24} strokeWidth={1.5} /&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 className="text-sm font-medium tracking-widest text-slate-700"&gt;委託開放中&lt;/h3&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p className="text-[11px] text-slate-500 mt-2 leading-relaxed font-light"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>目前排單約需等待 2-3 週&lt;br/&gt;歡迎私訊詢問檔期</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div className="md:col-span-2 space-y-3 relative min-h-[200px]"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>{isLoadingQueue &amp;&amp; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="absolute inset-0 bg-white/80 z-20 flex flex-col items-center justify-center backdrop-blur-sm rounded-2xl transition-opacity duration-300"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;RefreshCw className="animate-spin text-[#7A9089] mb-2" size={24} /&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span className="text-xs text-slate-500 tracking-widest"&gt;同步雲端資料中...&lt;/span&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>)}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                        </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>{queueData.map((item) =&gt; (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div key={item.id} className="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-slate-100 hover:border-[#DCE6E2] transition-colors duration-300"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="flex items-center gap-3"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-500 font-medium"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>{item.id.toString().padStart(2, '0')}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="text-xs font-medium text-slate-700 tracking-wider"&gt;{item.name}&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="text-[10px] text-slate-500 mt-0.5"&gt;{item.status}&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>className="h-full bg-[#8FA39D] rounded-full transition-all duration-1000 ease-out"<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                                </span>style={{ width: `${item.progress}%` }}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&gt;&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>))}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">                        </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="text-center text-[10px] mt-4 tracking-widest flex items-center justify-center gap-2"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>{fetchError ? (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span className="text-red-400 flex items-center gap-1"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;AlertCircle size={10} /&gt; {fetchError}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/span&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>) : (</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span className="text-slate-400 flex items-center gap-1"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;CheckCircle2 size={10} className="text-[#7A9089]" /&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>{SHEET_CSV_URL ? "資料已同步自雲端" : "僅顯示範例資料"}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/span&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>)}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/section&gt;</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>{/* Footer */}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;footer className="py-10 px-6 text-center text-[10px] text-slate-400 tracking-widest font-light"&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>© 2023 Hoshino Art. All rights reserved.&lt;br/&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>Designed with &lt;Heart size={10} className="inline mx-1 text-slate-400" /&gt; by You</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/footer&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s7"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>// 3. 渲染到頁面</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>const root = ReactDOM.createRoot(document.getElementById('root'));</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>root.render(&lt;ArtistPortfolio /&gt;);</span></p>
-<p class="p1"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;/</span><span class="s1">script</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;/</span><span class="s1">body</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;/</span><span class="s1">html</span><span class="s3">&gt;</span></p>
+<body class="bg-[#F9F9F9] text-slate-600 font-sans selection:bg-slate-200 selection:text-slate-800">
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // ------------------------------------------------------------
+        // 1. 設定區
+        // ------------------------------------------------------------
+        const { useState, useEffect, useCallback, useRef } = React;
+
+        // 圖示轉換器 (將 React 圖示轉為 Lucide Vanilla SVG)
+        const Icon = ({ name, ...props }) => {
+            const iconName = name;
+            // 確保 lucide 已經載入
+            if (!window.lucide || !window.lucide.icons[iconName]) return null;
+            
+            // 產生 SVG HTML
+            const svgString = window.lucide.icons[iconName].toSVG(props);
+            return <span dangerouslySetInnerHTML={{ __html: svgString }} style={{ display: 'inline-flex', alignItems: 'center' }} />;
+        };
+
+        // 定義會用到的圖示組件
+        const Palette = (p) => <Icon name="palette" {...p} />;
+        const List = (p) => <Icon name="list" {...p} />;
+        const Image = (p) => <Icon name="image" {...p} />;
+        const FileText = (p) => <Icon name="fileText" {...p} />;
+        const User = (p) => <Icon name="user" {...p} />;
+        const Heart = (p) => <Icon name="heart" {...p} />;
+        const Sparkles = (p) => <Icon name="sparkles" {...p} />;
+        const CheckCircle2 = (p) => <Icon name="checkCircle2" {...p} />;
+        const AlertCircle = (p) => <Icon name="alertCircle" {...p} />;
+        const Mail = (p) => <Icon name="mail" {...p} />;
+        const Instagram = (p) => <Icon name="instagram" {...p} />;
+        const Twitter = (p) => <Icon name="twitter" {...p} />;
+        const RefreshCw = (p) => <Icon name="refreshCw" {...p} />;
+        const LayoutGrid = (p) => <Icon name="layoutGrid" {...p} />;
+        const Smile = (p) => <Icon name="smile" {...p} />;
+        const PenTool = (p) => <Icon name="penTool" {...p} />;
+        const ChevronRight = (p) => <Icon name="chevronRight" {...p} />;
+        const Donut = (p) => <Icon name="donut" {...p} />;
+
+        // --- Google Sheets 設定 ---
+        const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1O7HyFnZuDqmtCl6Xx-DOGUfkiYU3N5bh6RxOAUpGPhUIM_MUGpp2eUoi02D3nJ7pGDs3bMMmeFov/pub?gid=1522759652&single=true&output=csv"; 
+
+        // 預設範例資料
+        const DEFAULT_QUEUE = [
+            { id: 1, name: "範例-K***", status: "草稿確認中", progress: 30 },
+            { id: 2, name: "範例-M***", status: "線稿繪製中", progress: 60 },
+            { id: 3, name: "範例-S***", status: "上色完稿中", progress: 90 },
+        ];
+
+        // 作品集分類與詳細項目
+        const portfolioCategories = [
+            { 
+                id: 'normal', 
+                name: '正比', 
+                items: [
+                { 
+                    title: '正比頭貼', 
+                    urls: [], 
+                    count: 5, 
+                    colorTone: 'blue' 
+                },
+                { 
+                    title: '正比半身', 
+                    urls: [], 
+                    count: 4, 
+                    colorTone: 'slate' 
+                },
+                { 
+                    title: '全身立繪', 
+                    urls: [], 
+                    count: 4, 
+                    colorTone: 'teal' 
+                }
+                ] 
+            },
+            { 
+                id: 'chibi', 
+                name: 'Ｑ版', 
+                items: [
+                { 
+                    title: 'Ｑ版頭貼', 
+                    urls: [], 
+                    count: 6, 
+                    colorTone: 'rose' 
+                },
+                { 
+                    title: 'Ｑ版全身', 
+                    urls: [
+                    "https://images.plurk.com/1PV4qjhyqgQ3JlrGmz784g.jpg",
+                    "https://images.plurk.com/4Jw62PCKlw0eyEPAbxmtMF.jpg",
+                    "https://images.plurk.com/6Bj4OTxzAb8W8gNaZ0ZKXu.jpg",
+                    "https://images.plurk.com/2K5GNk3hX3mwx1RDA2VQc4.jpg"
+                    ], 
+                    count: 5, 
+                    colorTone: 'orange' 
+                },
+                { 
+                    title: '服裝設計', 
+                    urls: [], 
+                    count: 4, 
+                    colorTone: 'indigo' 
+                }
+                ] 
+            },
+            { 
+                id: 'other', 
+                name: '其他', 
+                items: [
+                { 
+                    title: '簡單線條', 
+                    urls: [], 
+                    count: 5, 
+                    colorTone: 'gray' 
+                },
+                { 
+                    title: '黑白塗鴉', 
+                    urls: [], 
+                    count: 4, 
+                    colorTone: 'stone' 
+                },
+                { 
+                    title: '貼圖設計', 
+                    urls: [], 
+                    count: 6, 
+                    colorTone: 'emerald' 
+                }
+                ] 
+            },
+        ];
+
+        // 模擬作品圖片組件
+        const ArtItem = ({ color, text, subText, imageUrl }) => {
+            return (
+                <div className={`w-full h-full ${!imageUrl ? color : 'bg-slate-100'} flex flex-col items-center justify-center text-slate-600/70 rounded-2xl overflow-hidden relative group transition-all duration-300 hover:shadow-md`}>
+                    {imageUrl ? (
+                    <img src={imageUrl} alt={text} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    ) : (
+                    <React.Fragment>
+                        <div className="absolute inset-0 bg-white/0 group-hover:bg-white/30 transition-all duration-500"></div>
+                        <div className="absolute top-2 right-2 opacity-30 group-hover:opacity-60 transition-opacity">
+                            <Sparkles size={16} />
+                        </div>
+                        <span className="text-xs tracking-widest font-light z-10">{text}</span>
+                        {subText && <span className="text-[10px] opacity-60 mt-1 tracking-wider z-10">{subText}</span>}
+                    </React.Fragment>
+                    )}
+                    
+                    {imageUrl && (
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                    )}
+                </div>
+            );
+        };
+
+        // 價目表資料
+        const priceList = [
+            {
+                category: "正比系列",
+                items: [
+                { title: "正比頭貼", price: "NT. 1000+", desc: "精緻全彩 / 含簡易裝飾", tags: ["頭貼", "精緻"] },
+                { title: "正比半身", price: "NT. 2000+", desc: "腰部以上 / 動作可指定", tags: ["插圖", "氛圍"] },
+                { title: "全身立繪", price: "NT. 3500+", desc: "包含角色設計 / 完整細節", tags: ["立繪", "設計"] },
+                ]
+            },
+            {
+                category: "Ｑ版系列",
+                items: [
+                { title: "Ｑ版頭貼", price: "NT. 500+", desc: "可愛大頭 / 適合社群", tags: ["可愛", "大頭"] },
+                { title: "Ｑ版全身", price: "NT. 1200+", desc: "二頭身或三頭身", tags: ["全身", "動態"] },
+                { title: "服裝設計", price: "NT. 2500+", desc: "Ｑ版素體 / 含三視圖", tags: ["拆分", "設計"] },
+                ]
+            },
+            {
+                category: "其他項目",
+                items: [
+                { title: "簡單線條", price: "NT. 300+", desc: "單色線條 / 簡單上色", tags: ["極簡", "快速"] },
+                { title: "黑白塗鴉", price: "NT. 800+", desc: "正比隨筆 / 氛圍感", tags: ["塗鴉", "黑白"] },
+                { title: "貼圖", price: "NT. 1500+", desc: "靜態貼圖 / 一組 8 張", tags: ["實用", "貼圖"] },
+                ]
+            }
+        ];
+
+        // 輔助函式：根據色調產生顏色
+        const getColorClass = (tone, index) => {
+            const intensities = [100, 200, 50, 300, 100, 200]; 
+            const intensity = intensities[index % intensities.length];
+            
+            const map = {
+                blue: `bg-blue-${intensity}`,
+                slate: `bg-slate-${intensity}`,
+                teal: `bg-teal-${intensity}`,
+                rose: `bg-rose-${intensity}`,
+                orange: `bg-orange-${intensity}`,
+                indigo: `bg-indigo-${intensity}`,
+                gray: `bg-gray-${intensity}`,
+                stone: `bg-stone-${intensity}`,
+                emerald: `bg-emerald-${intensity}`,
+            };
+            return map[tone] || `bg-slate-${intensity}`;
+        };
+
+        // ------------------------------------------------------------
+        // 2. 主組件
+        // ------------------------------------------------------------
+        function ArtistPortfolio() {
+            const [activeSection, setActiveSection] = useState('home');
+            const [queueData, setQueueData] = useState(DEFAULT_QUEUE);
+            const [isLoadingQueue, setIsLoadingQueue] = useState(false);
+            const [fetchError, setFetchError] = useState(null);
+            const [activePortfolioTab, setActivePortfolioTab] = useState('normal');
+
+            // 讀取 Google Sheet (包含重試機制)
+            const fetchSheet = useCallback(async () => {
+                if (!SHEET_CSV_URL) return;
+
+                setIsLoadingQueue(true);
+                setFetchError(null);
+                
+                const parseCSV = (text) => {
+                const rows = text.split(/\r?\n/).slice(1);
+                return rows.map((row, index) => {
+                    const cols = row.split(',');
+                    if (cols.length < 3) return null; 
+                    
+                    const name = cols[0]?.trim();
+                    const status = cols[1]?.trim();
+                    const progressString = cols[2]?.trim().replace('%', '');
+                    const progress = parseInt(progressString) || 0;
+
+                    if (!name) return null; 
+
+                    return {
+                    id: index + 1,
+                    name: name,
+                    status: status,
+                    progress: progress
+                    };
+                }).filter(Boolean);
+                };
+
+                try {
+                const timestamp = new Date().getTime();
+                const separator = SHEET_CSV_URL.includes('?') ? '&' : '?';
+                const urlWithTimestamp = `${SHEET_CSV_URL}${separator}_t=${timestamp}`;
+                
+                let response;
+
+                try {
+                    const proxyUrlPrimary = `https://api.allorigins.win/raw?url=${encodeURIComponent(urlWithTimestamp)}`;
+                    response = await fetch(proxyUrlPrimary);
+                    if (!response.ok) throw new Error("Primary proxy failed");
+                } catch (err) {
+                    const proxyUrlSecondary = `https://corsproxy.io/?${encodeURIComponent(urlWithTimestamp)}`;
+                    response = await fetch(proxyUrlSecondary);
+                }
+
+                if (!response || !response.ok) throw new Error("All proxies failed");
+                
+                const text = await response.text();
+                const parsedData = parseCSV(text);
+
+                if (parsedData.length > 0) {
+                    setQueueData(parsedData);
+                }
+                } catch (error) {
+                console.error("無法讀取排單表:", error);
+                setFetchError("暫時無法同步雲端，目前顯示範例");
+                } finally {
+                setIsLoadingQueue(false);
+                }
+            }, []);
+
+            useEffect(() => {
+                fetchSheet();
+            }, [fetchSheet]);
+
+            const scrollTo = (id) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    setActiveSection(id);
+                }
+            };
+
+            return (
+                <div>
+                {/* 導航列 */}
+                <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-center">
+                    <div className="glass-panel rounded-full px-8 py-3 shadow-sm shadow-slate-200/30 flex items-center gap-8 text-xs font-theme text-slate-500 overflow-x-auto max-w-full">
+                    <button onClick={() => scrollTo('home')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap">主頁</button>
+                    <button onClick={() => scrollTo('about')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap">關於</button>
+                    <button onClick={() => scrollTo('portfolio')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap">範例</button>
+                    
+                    <span className="text-slate-300 hidden md:flex items-center justify-center">
+                        <Donut size={14} strokeWidth={2} />
+                    </span>
+
+                    <button onClick={() => scrollTo('pricing')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap">價目</button>
+                    <button onClick={() => scrollTo('status')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap">排單</button>
+                    <button onClick={() => scrollTo('terms')} className="hover:text-slate-800 transition-colors font-medium whitespace-nowrap">須知</button>
+                    </div>
+                </nav>
+
+                {/* 1. 主視覺 (Hero) */}
+                <header id="home" className="pt-28 pb-12 overflow-hidden flex flex-col items-center justify-center min-h-[60vh]">
+                    <div className="text-center mb-10 space-y-3">
+                    <div className="inline-block px-3 py-1 rounded-full bg-[#EFF2F1] text-[#6A857D] text-[10px] tracking-[0.2em] font-medium border border-[#E5EBE9]">
+                        ILLUSTRATION & DESIGN
+                    </div>
+                    <h1 className="text-3xl md:text-4xl font-light tracking-[0.15em] text-slate-700">
+                        星野的繪圖小窩
+                    </h1>
+                    <p className="text-xs text-slate-500 tracking-widest font-light">
+                        用畫筆捕捉生活中的溫柔與色彩
+                    </p>
+                    </div>
+
+                    {/* 跑馬燈 */}
+                    <div className="w-full relative py-4">
+                    <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#F9F9F9] to-transparent z-10"></div>
+                    <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#F9F9F9] to-transparent z-10"></div>
+                    <div className="w-full overflow-hidden whitespace-nowrap">
+                        <div className="marquee-content gap-4 px-4">
+                        {[...Array(2)].map((_, i) => (
+                            <div key={i} className="flex gap-4">
+                            <div className="w-64 h-40 bg-[#E1E6EB] rounded-2xl flex-shrink-0"><ArtItem color="bg-[#E1E6EB]" text="Artwork 01" /></div>
+                            <div className="w-64 h-40 bg-[#E1EBE8] rounded-2xl flex-shrink-0"><ArtItem color="bg-[#E1EBE8]" text="Artwork 02" /></div>
+                            <div className="w-64 h-40 bg-[#E3E3EA] rounded-2xl flex-shrink-0"><ArtItem color="bg-[#E3E3EA]" text="Artwork 03" /></div>
+                            <div className="w-64 h-40 bg-[#EBE3E3] rounded-2xl flex-shrink-0"><ArtItem color="bg-[#EBE3E3]" text="Artwork 04" /></div>
+                            <div className="w-64 h-40 bg-[#EBE8E1] rounded-2xl flex-shrink-0"><ArtItem color="bg-[#EBE8E1]" text="Artwork 05" /></div>
+                            <div className="w-64 h-40 bg-[#E1EBE4] rounded-2xl flex-shrink-0"><ArtItem color="bg-[#E1EBE4]" text="Artwork 06" /></div>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                    </div>
+                </header>
+
+                {/* 2. 關於我 (About) */}
+                <section id="about" className="py-20 px-6 bg-white text-center">
+                    <div className="max-w-md mx-auto">
+                    <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-slate-200 to-gray-200 p-1 mb-6">
+                        <div className="w-full h-full bg-white rounded-full overflow-hidden"><ArtItem color="bg-[#F9F9F9]" text="ME" /></div>
+                    </div>
+                    <h2 className="text-lg font-light tracking-[0.2em] text-slate-600 mb-2">HOSHINO</h2>
+                    <p className="text-xs text-slate-500 tracking-widest font-light mb-8">
+                        喜歡甜點、貓咪與午後的陽光。<br/>
+                        致力於畫出溫暖人心的作品。
+                    </p>
+                    <div className="flex justify-center gap-4">
+                        <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#E5EBE9] hover:text-[#6F827D] hover:border-[#E5EBE9] transition-all hover:-translate-y-1"><Twitter size={16} /></a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#EBE6E6] hover:text-[#997A7A] hover:border-[#EBE6E6] transition-all hover:-translate-y-1"><Instagram size={16} /></a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#E6EBF0] hover:text-[#7A8C99] hover:border-[#E6EBF0] transition-all hover:-translate-y-1"><Mail size={16} /></a>
+                    </div>
+                    </div>
+                </section>
+
+                {/* 3. 範例 */}
+                <section id="portfolio" className="py-20 px-6 bg-[#F9F9F9]">
+                    <div className="max-w-6xl mx-auto">
+                    <div className="flex flex-col items-center gap-6 mb-12">
+                        <h2 className="text-lg font-light tracking-widest text-slate-700">精選範例</h2>
+                        
+                        <div className="flex p-1 bg-slate-100 rounded-full">
+                            {portfolioCategories.map((cat) => (
+                            <button
+                                key={cat.id}
+                                onClick={() => setActivePortfolioTab(cat.id)}
+                                className={`px-6 py-2 rounded-full text-xs tracking-widest transition-all duration-300 ${
+                                activePortfolioTab === cat.id 
+                                ? 'bg-white text-slate-700 shadow-sm font-medium' 
+                                : 'text-slate-400 hover:text-slate-600'
+                                }`}
+                            >
+                                {cat.name}
+                            </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="space-y-12">
+                        {portfolioCategories.find(c => c.id === activePortfolioTab)?.items.map((subItem, idx) => (
+                        <div key={idx} className="space-y-4">
+                            <div className="flex items-center gap-2 px-2">
+                            <div className="w-1 h-4 bg-slate-200 rounded-full"></div>
+                            <h3 className="text-sm text-slate-600 tracking-widest font-medium">{subItem.title}</h3>
+                            <span className="text-[10px] text-slate-300 font-light ml-auto flex items-center gap-1">
+                                左右滑動查看 <ChevronRight size={10} />
+                            </span>
+                            </div>
+                            
+                            <div className="flex overflow-x-auto gap-4 pb-4 px-2 snap-x snap-mandatory hide-scrollbar">
+                            {(() => {
+                                const hasImages = subItem.urls && subItem.urls.length > 0;
+                                const itemsToRender = hasImages ? subItem.urls : [...Array(subItem.count)];
+                                
+                                return itemsToRender.map((itemContent, imgIndex) => {
+                                const colorClass = getColorClass(subItem.colorTone, imgIndex);
+                                const widthClass = "min-w-[200px] w-[200px]";
+                                const imageUrl = hasImages ? itemContent : null;
+
+                                return (
+                                    <div key={imgIndex} className={`${widthClass} h-48 snap-center flex-shrink-0`}>
+                                    <ArtItem 
+                                        color={colorClass} 
+                                        text={subItem.title} 
+                                        subText={`Sample ${String(imgIndex + 1).padStart(2, '0')}`}
+                                        imageUrl={imageUrl} 
+                                    />
+                                    </div>
+                                );
+                                });
+                            })()}
+                            </div>
+                        </div>
+                        ))}
+                    </div>
+                    </div>
+                </section>
+
+                {/* 4. 價目表 */}
+                <section id="pricing" className="py-20 px-6 max-w-5xl mx-auto bg-white">
+                    <div className="flex items-center gap-3 mb-12 justify-center">
+                    <h2 className="text-lg font-light tracking-widest text-slate-700">委託項目</h2>
+                    </div>
+                    
+                    <div className="space-y-16">
+                    {priceList.map((category, catIndex) => (
+                        <div key={catIndex}>
+                        <div className="flex items-center justify-center gap-4 mb-8">
+                            <div className="h-px w-6 bg-slate-200"></div>
+                            <h3 className="text-sm font-medium text-slate-500 tracking-[0.2em]">{category.category}</h3>
+                            <div className="h-px w-6 bg-slate-200"></div>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {category.items.map((item, index) => (
+                            <div key={index} className="group relative bg-white rounded-[2rem] p-8 border border-slate-100 hover:border-[#DCE6E2] transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/40">
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white border border-slate-100 rounded-full flex items-center justify-center group-hover:bg-[#F2F5F4] group-hover:text-[#8FA39D] transition-colors">
+                                {catIndex === 0 && <LayoutGrid size={16} strokeWidth={1.5} className="text-slate-300 group-hover:text-[#8FA39D]" />}
+                                {catIndex === 1 && <Smile size={16} strokeWidth={1.5} className="text-slate-300 group-hover:text-[#8FA39D]" />}
+                                {catIndex === 2 && <PenTool size={16} strokeWidth={1.5} className="text-slate-300 group-hover:text-[#8FA39D]" />}
+                                </div>
+                                
+                                <div className="text-center mt-4">
+                                <h3 className="text-sm font-medium tracking-widest text-slate-700 mb-2">{item.title}</h3>
+                                <div className="text-xl font-light text-slate-800 font-sans mb-4">{item.price}</div>
+                                <div className="w-8 h-px bg-slate-200 mx-auto mb-4"></div>
+                                <p className="text-xs text-slate-500 mb-6 leading-relaxed min-h-[3em]">{item.desc}</p>
+                                
+                                <div className="flex flex-wrap gap-2 justify-center">
+                                    {item.tags.map((tag, i) => (
+                                    <span key={i} className="px-2 py-1 rounded-md bg-[#F7F9F9] text-[10px] text-slate-500 tracking-wider">
+                                        #{tag}
+                                    </span>
+                                    ))}
+                                </div>
+                                </div>
+                            </div>
+                            ))}
+                        </div>
+                        </div>
+                    ))}
+                    </div>
+                </section>
+
+                {/* 5. 排單狀態 */}
+                <section id="status" className="py-20 px-6 max-w-4xl mx-auto">
+                    <div className="flex items-center gap-3 mb-8 justify-center relative">
+                    <div className="h-px w-8 bg-slate-300"></div>
+                    <h2 className="text-lg font-light tracking-widest text-slate-700">目前狀態</h2>
+                    <div className="h-px w-8 bg-slate-300"></div>
+                    
+                    <button 
+                        onClick={fetchSheet} 
+                        disabled={isLoadingQueue}
+                        className="absolute right-0 md:-right-12 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-all"
+                        title="重新整理排單"
+                    >
+                        <RefreshCw size={14} className={isLoadingQueue ? "animate-spin text-[#7A9089]" : ""} />
+                    </button>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-6">
+                    <div className="md:col-span-1 glass-panel rounded-3xl p-6 text-center space-y-4 flex flex-col justify-center items-center">
+                        <div className="w-16 h-16 mx-auto rounded-full bg-[#F0F4F3] flex items-center justify-center text-[#7A9089]">
+                        <Sparkles size={24} strokeWidth={1.5} />
+                        </div>
+                        <div>
+                        <h3 className="text-sm font-medium tracking-widest text-slate-700">委託開放中</h3>
+                        <p className="text-[11px] text-slate-500 mt-2 leading-relaxed font-light">
+                            目前排單約需等待 2-3 週<br/>歡迎私訊詢問檔期
+                        </p>
+                        </div>
+                    </div>
+
+                    <div className="md:col-span-2 space-y-3 relative min-h-[200px]">
+                        {isLoadingQueue && (
+                        <div className="absolute inset-0 bg-white/80 z-20 flex flex-col items-center justify-center backdrop-blur-sm rounded-2xl transition-opacity duration-300">
+                            <RefreshCw className="animate-spin text-[#7A9089] mb-2" size={24} />
+                            <span className="text-xs text-slate-500 tracking-widest">同步雲端資料中...</span>
+                        </div>
+                        )}
+                        
+                        {queueData.map((item) => (
+                        <div key={item.id} className="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-slate-100 hover:border-[#DCE6E2] transition-colors duration-300">
+                            <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-500 font-medium">
+                                {item.id.toString().padStart(2, '0')}
+                            </div>
+                            <div>
+                                <div className="text-xs font-medium text-slate-700 tracking-wider">{item.name}</div>
+                                <div className="text-[10px] text-slate-500 mt-0.5">{item.status}</div>
+                            </div>
+                            </div>
+                            <div className="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                            <div 
+                                className="h-full bg-[#8FA39D] rounded-full transition-all duration-1000 ease-out" 
+                                style={{ width: `${item.progress}%` }}
+                            ></div>
+                            </div>
+                        </div>
+                        ))}
+                        
+                        <div className="text-center text-[10px] mt-4 tracking-widest flex items-center justify-center gap-2">
+                        {fetchError ? (
+                            <span className="text-red-400 flex items-center gap-1">
+                            <AlertCircle size={10} /> {fetchError}
+                            </span>
+                        ) : (
+                            <span className="text-slate-400 flex items-center gap-1">
+                            <CheckCircle2 size={10} className="text-[#7A9089]" /> 
+                            {SHEET_CSV_URL ? "資料已同步自雲端" : "僅顯示範例資料"}
+                            </span>
+                        )}
+                        </div>
+                    </div>
+                    </div>
+                </section>
+
+                {/* Footer */}
+                <footer className="py-10 px-6 text-center text-[10px] text-slate-400 tracking-widest font-light">
+                    © 2023 Hoshino Art. All rights reserved.<br/>
+                    Designed with <Heart size={10} className="inline mx-1 text-slate-400" /> by You
+                </footer>
+                </div>
+            );
+        }
+
+        // 3. 渲染到頁面
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ArtistPortfolio />);
+    </script>
 </body>
 </html>
