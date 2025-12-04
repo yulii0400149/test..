@@ -3,87 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>星野的繪圖小窩</title>
+    <title>夏由里 | 插畫作品集</title>
     
-    <!-- 1. 引入 Tailwind CSS (樣式庫) -->
+    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- 2. 引入 React 和 ReactDOM -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- 引入 React 和 ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- 3. 引入 Babel (讓瀏覽器看懂 JSX) -->
+    <!-- 引入 Babel 用於解析 JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- 4. 引入 Lucide Icons (圖示庫) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-        /* 自定義樣式補充 */
-        body { font-family: "Helvetica Neue", Arial, "Heiti TC", sans-serif; }
-        .font-theme { font-weight: 300; letter-spacing: 0.1em; }
-        .glass-panel { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.8); }
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+    <!-- Tailwind 設定 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Helvetica Neue"', 'Arial', '"Heiti TC"', 'sans-serif'],
+                    }
+                }
+            }
         }
-        .marquee-content { display: flex; animation: scroll 40s linear infinite; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+    </script>
 </head>
-<body class="bg-[#F9F9F9] text-slate-600 font-sans selection:bg-slate-200 selection:text-slate-800">
-    
+<body class="bg-[#F9F9F9]">
     <div id="root"></div>
 
     <script type="text/babel">
-        // ------------------------------------------------------------
-        // 1. 設定區
-        // ------------------------------------------------------------
-        const { useState, useEffect, useCallback, useRef } = React;
+        const { useState, useEffect, useCallback } = React;
 
-        // 圖示轉換器 (將 React 圖示轉為 Lucide Vanilla SVG)
-        const Icon = ({ name, ...props }) => {
-            const iconName = name;
-            // 確保 lucide 已經載入
-            if (!window.lucide || !window.lucide.icons[iconName]) return null;
-            
-            // 產生 SVG HTML
-            const svgString = window.lucide.icons[iconName].toSVG(props);
-            return <span dangerouslySetInnerHTML={{ __html: svgString }} style={{ display: 'inline-flex', alignItems: 'center' }} />;
-        };
+        // --- 圖示組件 (模擬 Lucide React) ---
+        const IconBase = ({ size = 24, className = "", children, ...props }) => (
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width={size} 
+                height={size} 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={className}
+                {...props}
+            >
+                {children}
+            </svg>
+        );
 
-        // 定義會用到的圖示組件
-        const Palette = (p) => <Icon name="palette" {...p} />;
-        const List = (p) => <Icon name="list" {...p} />;
-        const Image = (p) => <Icon name="image" {...p} />;
-        const FileText = (p) => <Icon name="fileText" {...p} />;
-        const User = (p) => <Icon name="user" {...p} />;
-        const Heart = (p) => <Icon name="heart" {...p} />;
-        const Sparkles = (p) => <Icon name="sparkles" {...p} />;
-        const CheckCircle2 = (p) => <Icon name="checkCircle2" {...p} />;
-        const AlertCircle = (p) => <Icon name="alertCircle" {...p} />;
-        const Mail = (p) => <Icon name="mail" {...p} />;
-        const Instagram = (p) => <Icon name="instagram" {...p} />;
-        const Twitter = (p) => <Icon name="twitter" {...p} />;
-        const RefreshCw = (p) => <Icon name="refreshCw" {...p} />;
-        const LayoutGrid = (p) => <Icon name="layoutGrid" {...p} />;
-        const Smile = (p) => <Icon name="smile" {...p} />;
-        const PenTool = (p) => <Icon name="penTool" {...p} />;
-        const ChevronRight = (p) => <Icon name="chevronRight" {...p} />;
-        const Donut = (p) => <Icon name="donut" {...p} />;
+        const Donut = (props) => <IconBase {...props}><path d="M20.5 10a2.5 2.5 0 0 1-2.4-3H18a2.97 2.97 0 0 0-4.42-2.49L9.15 11.2A7.98 7.98 0 0 0 3.84 13.9a7.53 7.53 0 0 0 5.86 1.48L11.75 12"/><path d="M5.52 16.8a8.03 8.03 0 0 0 13.68-.45"/><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/></IconBase>;
+        const Sparkles = (props) => <IconBase {...props}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M9 3v4"/><path d="M3 5h4"/><path d="M3 9h4"/></IconBase>;
+        const Facebook = (props) => <IconBase {...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></IconBase>;
+        const Mail = (props) => <IconBase {...props}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></IconBase>;
+        const ChevronRight = (props) => <IconBase {...props}><path d="m9 18 6-6-6-6"/></IconBase>;
+        const LayoutGrid = (props) => <IconBase {...props}><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></IconBase>;
+        const Smile = (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></IconBase>;
+        const PenTool = (props) => <IconBase {...props}><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></IconBase>;
+        const RefreshCw = (props) => <IconBase {...props}><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></IconBase>;
+        const CheckCircle2 = (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></IconBase>;
+        const AlertCircle = (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></IconBase>;
+        const FileText = (props) => <IconBase {...props}><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></IconBase>;
+        const Heart = (props) => <IconBase {...props}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></IconBase>;
 
-        // --- Google Sheets 設定 ---
+        // 自定義 Plurk 圖示 (與原始碼相同)
+        const PlurkIcon = ({ size = 24, className }) => (
+            <svg 
+            width={size} 
+            height={size} 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className={className}
+            >
+            <path d="M6 4v16" />
+            <path d="M6 4h6a6 6 0 0 1 0 12h-6" />
+            </svg>
+        );
+
+        // --- 設定與資料 ---
         const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1O7HyFnZuDqmtCl6Xx-DOGUfkiYU3N5bh6RxOAUpGPhUIM_MUGpp2eUoi02D3nJ7pGDs3bMMmeFov/pub?gid=1522759652&single=true&output=csv"; 
 
-        // 預設範例資料
         const DEFAULT_QUEUE = [
             { id: 1, name: "範例-K***", status: "草稿確認中", progress: 30 },
-            { id: 2, name: "範例-M***", status: "線稿繪製中", progress: 60 },
-            { id: 3, name: "範例-S***", status: "上色完稿中", progress: 90 },
+            { id: 2, name: "範例-M***", status: "底色繪製中", progress: 60 },
+            { id: 3, name: "範例-S***", status: "細化完稿中", progress: 90 },
         ];
 
-        // 作品集分類與詳細項目
         const portfolioCategories = [
             { 
                 id: 'normal', 
@@ -91,21 +101,51 @@
                 items: [
                 { 
                     title: '正比頭貼', 
-                    urls: [], 
+                    urls: [
+                    "https://images.plurk.com/uO75w0OLVQZTLHj2YLgLt.jpg",
+                    "https://images.plurk.com/4OmcOtem9blDuA8sLCBWoQ.jpg",
+                    "https://images.plurk.com/79tDwfnBjat2R76ZNwevjS.jpg",
+                    "https://images.plurk.com/1rfEPGkKYeSNkcUasUcJ8y.jpg",
+                    "https://images.plurk.com/6sDB8OsMOs2ugAYOEGZmVu.jpg",
+                    "https://images.plurk.com/4H10D5mfVAqBNaj3TkmhmZ.jpg",
+                    "https://images.plurk.com/4jKzqZsGCzcJEhR9KO4TpJ.jpg",
+                    "https://images.plurk.com/44s1JcxjA5LnSaBlUen7du.jpg"
+                    
+                    ], 
                     count: 5, 
                     colorTone: 'blue' 
                 },
                 { 
                     title: '正比半身', 
-                    urls: [], 
+                    urls: [
+                    "https://images.plurk.com/2x5FoWpwpweO5nDTxT5fPF.jpg",
+                    "https://images.plurk.com/1FOXbYYul1sIE7OOGXVMMg.jpg",
+                    "https://images.plurk.com/4DDFxixdyEmvAjhrapyOF9.jpg",
+                    "https://images.plurk.com/7G6rlygQMSSofos1rSTnwR.jpg",
+                    "https://images.plurk.com/6UehkANd2TUJLKzDR30kR0.jpg",
+                    "https://images.plurk.com/7l4BPIENRi1lP5OWGFuKaS.jpg",
+                    "https://images.plurk.com/65Cd3waiS2QsxAarj5U4xb.jpg",
+                    "https://images.plurk.com/5xBpRnXrX6gAoMjISsQRL3.jpg",
+                    "https://images.plurk.com/1CuK8rdC2k9Fkdg1CeQaUp.jpg"
+                    ], 
                     count: 4, 
-                    colorTone: 'slate' 
+                    colorTone: 'slate',
+                    heightClass: "h-[282px]" 
                 },
                 { 
                     title: '全身立繪', 
-                    urls: [], 
+                    urls: [
+                    "https://images.plurk.com/qUFyEDCDwx1YS3fN5w6RH.jpg",
+                    "https://images.plurk.com/43ayprKbbN9YoeRa10ET7T.jpg",
+                    "https://images.plurk.com/10b9t9RTrau6ggLEkrPb3l.jpg",
+                    "https://images.plurk.com/3rWr3FQqPptoUvJzS6dfv1.jpg",
+                    "https://images.plurk.com/27Wj9r2z7sJqbnzEjvVttg.jpg",
+                    "https://images.plurk.com/5U3rmt9p1sP8QYeritoGMh.jpg"
+                    
+                    ], 
                     count: 4, 
-                    colorTone: 'teal' 
+                    colorTone: 'teal',
+                    heightClass: "h-[282px]" 
                 }
                 ] 
             },
@@ -115,7 +155,17 @@
                 items: [
                 { 
                     title: 'Ｑ版頭貼', 
-                    urls: [], 
+                    urls: [
+                        "https://images.plurk.com/5Y1wlUe39tFDXqXf51QmNo.jpg",
+                        "https://images.plurk.com/37PqU8G8DpMGwR8AXnOpKV.jpg",
+                        "https://images.plurk.com/34izE34Gr6doNjm48Mrjck.jpg",
+                        "https://images.plurk.com/5hIxbqwCxejnayotWY7i2D.jpg",
+                        "https://images.plurk.com/zQ92Hf0OiZc3hH5zfc4uS.jpg",
+                        "https://images.plurk.com/6ESaAV13eeJJcC6QyVkBuV.jpg",
+                        "https://images.plurk.com/2NYxnCcXT9LW5japIcbQvs.jpg",
+                        "https://images.plurk.com/3PPDGGiQ2SV2XuLT4berHO.jpg",
+                        "https://images.plurk.com/MU1x2WOJ9nrVkkP9aZJtd.jpg"
+                    ], 
                     count: 6, 
                     colorTone: 'rose' 
                 },
@@ -124,17 +174,41 @@
                     urls: [
                     "https://images.plurk.com/1PV4qjhyqgQ3JlrGmz784g.jpg",
                     "https://images.plurk.com/4Jw62PCKlw0eyEPAbxmtMF.jpg",
+                    "https://images.plurk.com/mcmooy8E1pPfluJ6hAmwT.jpg",
+                    "https://images.plurk.com/2MOWQ24Q7Kr2WHprJq4FPh.jpg",
+                    "https://images.plurk.com/6WYC0lfzAeJtgjPEIkTDam.jpg",
                     "https://images.plurk.com/6Bj4OTxzAb8W8gNaZ0ZKXu.jpg",
-                    "https://images.plurk.com/2K5GNk3hX3mwx1RDA2VQc4.jpg"
+                    "https://images.plurk.com/2K5GNk3hX3mwx1RDA2VQc4.jpg",
+                    "https://images.plurk.com/7w4diGK7VWgbFE9w1Mdjw7.jpg",
+                    "https://images.plurk.com/6R0Aj9Ml7wU6IcGb7Vk6tG.jpg",
+                    "https://images.plurk.com/3t5oKZ1BnfGdUJWV3dTPSi.jpg"
                     ], 
                     count: 5, 
                     colorTone: 'orange' 
                 },
                 { 
-                    title: '服裝設計', 
-                    urls: [], 
+                    title: 'Ｑ版插圖', 
+                    urls: [
+                    "https://images.plurk.com/6chk7xnKVuyUIzHFGhdbor.jpg",
+                    "https://images.plurk.com/78hHxAFlBCSIV5dlUmhKK8.jpg",
+                    "https://images.plurk.com/5pImFw6KSyOQsf4TCQgWZO.jpg",
+                    "https://images.plurk.com/5yrzLQOcyFKEsZuxTEtBY7.jpg",
+                    "https://images.plurk.com/6UKt7nrsckHs8qbrSplWsm.jpg"
+                    ], 
                     count: 4, 
-                    colorTone: 'indigo' 
+                    colorTone: 'pink',
+                    widthClass: "min-w-[288px] w-[260px]" 
+                },
+                { 
+                    title: '服裝設計', 
+                    urls: [
+                    "https://images.plurk.com/6HartYiK9jAXXeTpTExTsz.jpg",
+                    "https://images.plurk.com/72FZTwMGCWz1FMm802P3xM.jpg",
+                    "https://images.plurk.com/7ba4OPL8bFYC7g8wSQwBlZ.jpg"
+                    ], 
+                    count: 3, 
+                    colorTone: 'indigo',
+                    widthClass: "min-w-[220px] w-[220px]" 
                 }
                 ] 
             },
@@ -146,16 +220,22 @@
                     title: '簡單線條', 
                     urls: [], 
                     count: 5, 
-                    colorTone: 'gray' 
+                    colorTone: 'gray',
+                    heightClass: "h-[282px]" 
                 },
                 { 
                     title: '黑白塗鴉', 
-                    urls: [], 
-                    count: 4, 
-                    colorTone: 'stone' 
+                    urls: [
+                    "https://images.plurk.com/4L4tnNaehQODD4p8avtPxc.jpg",
+                    "https://images.plurk.com/6Hb1fOuh7BrpIrXrw0jYl1.jpg",
+                    "https://images.plurk.com/3UqRaIDahvGzHAjS2rqzO9.jpg",
+                    ], 
+                    count: 3, 
+                    colorTone: 'stone',
+                    heightClass: "h-[282px]" 
                 },
                 { 
-                    title: '貼圖設計', 
+                    title: 'LINE貼圖', 
                     urls: [], 
                     count: 6, 
                     colorTone: 'emerald' 
@@ -164,46 +244,22 @@
             },
         ];
 
-        // 模擬作品圖片組件
-        const ArtItem = ({ color, text, subText, imageUrl }) => {
-            return (
-                <div className={`w-full h-full ${!imageUrl ? color : 'bg-slate-100'} flex flex-col items-center justify-center text-slate-600/70 rounded-2xl overflow-hidden relative group transition-all duration-300 hover:shadow-md`}>
-                    {imageUrl ? (
-                    <img src={imageUrl} alt={text} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                    ) : (
-                    <React.Fragment>
-                        <div className="absolute inset-0 bg-white/0 group-hover:bg-white/30 transition-all duration-500"></div>
-                        <div className="absolute top-2 right-2 opacity-30 group-hover:opacity-60 transition-opacity">
-                            <Sparkles size={16} />
-                        </div>
-                        <span className="text-xs tracking-widest font-light z-10">{text}</span>
-                        {subText && <span className="text-[10px] opacity-60 mt-1 tracking-wider z-10">{subText}</span>}
-                    </React.Fragment>
-                    )}
-                    
-                    {imageUrl && (
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                    )}
-                </div>
-            );
-        };
-
-        // 價目表資料
         const priceList = [
             {
                 category: "正比系列",
                 items: [
-                { title: "正比頭貼", price: "NT. 1000+", desc: "精緻全彩 / 含簡易裝飾", tags: ["頭貼", "精緻"] },
-                { title: "正比半身", price: "NT. 2000+", desc: "腰部以上 / 動作可指定", tags: ["插圖", "氛圍"] },
-                { title: "全身立繪", price: "NT. 3500+", desc: "包含角色設計 / 完整細節", tags: ["立繪", "設計"] },
+                { title: "正比頭貼", price: "NT. 800+", desc: "精緻全彩 / 含簡易背景裝飾 / 可加價繪製物件", tags: ["頭貼", "精緻"] },
+                { title: "正比半身", price: "NT. 2000+", desc: "範圍腰部以上 / 動作可指定 / 背景另外加價", tags: ["插圖", "氛圍"] },
+                { title: "全身立繪", price: "NT. 2500+", desc: "可加價角色設計、排版表情差分 / 完整細節", tags: ["立繪", "設計"] },
                 ]
             },
             {
                 category: "Ｑ版系列",
                 items: [
-                { title: "Ｑ版頭貼", price: "NT. 500+", desc: "可愛大頭 / 適合社群", tags: ["可愛", "大頭"] },
-                { title: "Ｑ版全身", price: "NT. 1200+", desc: "二頭身或三頭身", tags: ["全身", "動態"] },
-                { title: "服裝設計", price: "NT. 2500+", desc: "Ｑ版素體 / 含三視圖", tags: ["拆分", "設計"] },
+                { title: "Ｑ版頭貼", price: "NT. 600+", desc: "可愛簡約大頭 / 可加價繪製多物件", tags: ["可愛", "大頭"] },
+                { title: "Ｑ版全身", price: "NT. 800+", desc: "可製作飯友 / 可配合大物件&動物等", tags: ["全身", "動態"] },
+                { title: "Ｑ版插圖", price: "NT. 1500+", desc: "包含光影背景 / 氛圍感", tags: ["插圖", "豐富"] },
+                { title: "服裝設計", price: "NT. 1500+", desc: "Ｑ版素體 / 含服裝配件", tags: ["拆分", "設計"] },
                 ]
             },
             {
@@ -216,9 +272,30 @@
             }
         ];
 
+        // 模擬作品圖片組件
+        const ArtItem = ({ color, text, subText, imageUrl }) => (
+        <div className={`w-full h-full ${!imageUrl ? color : 'bg-slate-100'} flex flex-col items-center justify-center text-slate-600/70 rounded-2xl overflow-hidden relative group transition-all duration-300 hover:shadow-md`}>
+            
+            {imageUrl ? (
+            <img src={imageUrl} alt={text} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            ) : (
+            <>
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/30 transition-all duration-500"></div>
+                <Sparkles className="absolute top-2 right-2 w-4 h-4 opacity-30 group-hover:opacity-60 transition-opacity" />
+                <span className="text-xs tracking-widest font-light z-10">{text}</span>
+                {subText && <span className="text-[10px] opacity-60 mt-1 tracking-wider z-10">{subText}</span>}
+            </>
+            )}
+            
+            {imageUrl && (
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+            )}
+        </div>
+        );
+
         // 輔助函式：根據色調產生顏色
         const getColorClass = (tone, index) => {
-            const intensities = [100, 200, 50, 300, 100, 200]; 
+            const intensities = [100, 200, 50, 300, 100, 200];
             const intensity = intensities[index % intensities.length];
             
             const map = {
@@ -227,6 +304,7 @@
                 teal: `bg-teal-${intensity}`,
                 rose: `bg-rose-${intensity}`,
                 orange: `bg-orange-${intensity}`,
+                pink: `bg-pink-${intensity}`,
                 indigo: `bg-indigo-${intensity}`,
                 gray: `bg-gray-${intensity}`,
                 stone: `bg-stone-${intensity}`,
@@ -235,9 +313,7 @@
             return map[tone] || `bg-slate-${intensity}`;
         };
 
-        // ------------------------------------------------------------
-        // 2. 主組件
-        // ------------------------------------------------------------
+        // --- 主組件 ---
         function ArtistPortfolio() {
             const [activeSection, setActiveSection] = useState('home');
             const [queueData, setQueueData] = useState(DEFAULT_QUEUE);
@@ -245,7 +321,6 @@
             const [fetchError, setFetchError] = useState(null);
             const [activePortfolioTab, setActivePortfolioTab] = useState('normal');
 
-            // 讀取 Google Sheet (包含重試機制)
             const fetchSheet = useCallback(async () => {
                 if (!SHEET_CSV_URL) return;
 
@@ -253,56 +328,56 @@
                 setFetchError(null);
                 
                 const parseCSV = (text) => {
-                const rows = text.split(/\r?\n/).slice(1);
-                return rows.map((row, index) => {
-                    const cols = row.split(',');
-                    if (cols.length < 3) return null; 
-                    
-                    const name = cols[0]?.trim();
-                    const status = cols[1]?.trim();
-                    const progressString = cols[2]?.trim().replace('%', '');
-                    const progress = parseInt(progressString) || 0;
+                    const rows = text.split(/\r?\n/).slice(1);
+                    return rows.map((row, index) => {
+                        const cols = row.split(',');
+                        if (cols.length < 3) return null; 
+                        
+                        const name = cols[0]?.trim();
+                        const status = cols[1]?.trim();
+                        const progressString = cols[2]?.trim().replace('%', '');
+                        const progress = parseInt(progressString) || 0;
 
-                    if (!name) return null; 
+                        if (!name) return null; 
 
-                    return {
-                    id: index + 1,
-                    name: name,
-                    status: status,
-                    progress: progress
-                    };
-                }).filter(Boolean);
+                        return {
+                        id: index + 1,
+                        name: name,
+                        status: status,
+                        progress: progress
+                        };
+                    }).filter(Boolean);
                 };
 
                 try {
-                const timestamp = new Date().getTime();
-                const separator = SHEET_CSV_URL.includes('?') ? '&' : '?';
-                const urlWithTimestamp = `${SHEET_CSV_URL}${separator}_t=${timestamp}`;
-                
-                let response;
+                    const timestamp = new Date().getTime();
+                    const separator = SHEET_CSV_URL.includes('?') ? '&' : '?';
+                    const urlWithTimestamp = `${SHEET_CSV_URL}${separator}_t=${timestamp}`;
+                    
+                    let response;
 
-                try {
-                    const proxyUrlPrimary = `https://api.allorigins.win/raw?url=${encodeURIComponent(urlWithTimestamp)}`;
-                    response = await fetch(proxyUrlPrimary);
-                    if (!response.ok) throw new Error("Primary proxy failed");
-                } catch (err) {
-                    const proxyUrlSecondary = `https://corsproxy.io/?${encodeURIComponent(urlWithTimestamp)}`;
-                    response = await fetch(proxyUrlSecondary);
-                }
+                    try {
+                        const proxyUrlPrimary = `https://api.allorigins.win/raw?url=${encodeURIComponent(urlWithTimestamp)}`;
+                        response = await fetch(proxyUrlPrimary);
+                        if (!response.ok) throw new Error("Primary proxy failed");
+                    } catch (err) {
+                        const proxyUrlSecondary = `https://corsproxy.io/?${encodeURIComponent(urlWithTimestamp)}`;
+                        response = await fetch(proxyUrlSecondary);
+                    }
 
-                if (!response || !response.ok) throw new Error("All proxies failed");
-                
-                const text = await response.text();
-                const parsedData = parseCSV(text);
+                    if (!response || !response.ok) throw new Error("All proxies failed");
+                    
+                    const text = await response.text();
+                    const parsedData = parseCSV(text);
 
-                if (parsedData.length > 0) {
-                    setQueueData(parsedData);
-                }
+                    if (parsedData.length > 0) {
+                        setQueueData(parsedData);
+                    }
                 } catch (error) {
-                console.error("無法讀取排單表:", error);
-                setFetchError("暫時無法同步雲端，目前顯示範例");
+                    console.error("無法讀取排單表:", error);
+                    setFetchError("暫時無法同步雲端，目前顯示範例");
                 } finally {
-                setIsLoadingQueue(false);
+                    setIsLoadingQueue(false);
                 }
             }, []);
 
@@ -313,13 +388,25 @@
             const scrollTo = (id) => {
                 const element = document.getElementById(id);
                 if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    setActiveSection(id);
+                element.scrollIntoView({ behavior: 'smooth' });
+                setActiveSection(id);
                 }
             };
 
             return (
-                <div>
+                <div className="min-h-screen bg-[#F9F9F9] text-slate-600 font-sans selection:bg-slate-200 selection:text-slate-800">
+                <style>{`
+                    .font-theme { font-weight: 300; letter-spacing: 0.1em; }
+                    .glass-panel { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.8); }
+                    @keyframes scroll {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                    }
+                    .marquee-content { display: flex; animation: scroll 40s linear infinite; }
+                    .hide-scrollbar::-webkit-scrollbar { display: none; }
+                    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+                `}</style>
+
                 {/* 導航列 */}
                 <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-center">
                     <div className="glass-panel rounded-full px-8 py-3 shadow-sm shadow-slate-200/30 flex items-center gap-8 text-xs font-theme text-slate-500 overflow-x-auto max-w-full">
@@ -343,11 +430,11 @@
                     <div className="inline-block px-3 py-1 rounded-full bg-[#EFF2F1] text-[#6A857D] text-[10px] tracking-[0.2em] font-medium border border-[#E5EBE9]">
                         ILLUSTRATION & DESIGN
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-light tracking-[0.15em] text-slate-700">
-                        星野的繪圖小窩
+                    <h1 className="text-xl md:text-2xl font-bold tracking-[0.15em] text-slate-700">
+                        早上起不來（由里）
                     </h1>
                     <p className="text-xs text-slate-500 tracking-widest font-light">
-                        用畫筆捕捉生活中的溫柔與色彩
+                        早上和棉被辦婚禮，中午還在洞房，目前離不開被窩
                     </p>
                     </div>
 
@@ -376,26 +463,36 @@
                 <section id="about" className="py-20 px-6 bg-white text-center">
                     <div className="max-w-md mx-auto">
                     <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-slate-200 to-gray-200 p-1 mb-6">
-                        <div className="w-full h-full bg-white rounded-full overflow-hidden"><ArtItem color="bg-[#F9F9F9]" text="ME" /></div>
+                        <div className="w-full h-full bg-white rounded-full overflow-hidden">
+                            <ArtItem 
+                            color="bg-[#F9F9F9]" 
+                            text="ME" 
+                            imageUrl="https://images.plurk.com/1TSnCrvhnKFYHxzG0pF2E9.jpg" 
+                            />
+                        </div>
                     </div>
-                    <h2 className="text-lg font-light tracking-[0.2em] text-slate-600 mb-2">HOSHINO</h2>
-                    <p className="text-xs text-slate-500 tracking-widest font-light mb-8">
-                        喜歡甜點、貓咪與午後的陽光。<br/>
-                        致力於畫出溫暖人心的作品。
+                    
+                    <h2 className="text-lg font-bold tracking-[0.2em] text-slate-600 mb-2">夏由里</h2>
+                    
+                    <p className="text-xs text-slate-500 tracking-widest font-light mb-8 leading-7">
+                        視覺傳達設計系畢業<br/>
+                        喜歡甜點、貓咪與回籠覺。<br/>
+                        小孩子外表的阿姨，<br/>
+                        再拆一層會發現裡面還是屁孩
                     </p>
                     <div className="flex justify-center gap-4">
-                        <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#E5EBE9] hover:text-[#6F827D] hover:border-[#E5EBE9] transition-all hover:-translate-y-1"><Twitter size={16} /></a>
-                        <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#EBE6E6] hover:text-[#997A7A] hover:border-[#EBE6E6] transition-all hover:-translate-y-1"><Instagram size={16} /></a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-100 transition-all hover:-translate-y-1"><Facebook size={16} /></a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-orange-50 hover:text-[#cf682f] hover:border-orange-100 transition-all hover:-translate-y-1"><PlurkIcon size={16} /></a>
                         <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#E6EBF0] hover:text-[#7A8C99] hover:border-[#E6EBF0] transition-all hover:-translate-y-1"><Mail size={16} /></a>
                     </div>
                     </div>
                 </section>
 
-                {/* 3. 範例 */}
+                {/* 3. 範例 (原作品集) */}
                 <section id="portfolio" className="py-20 px-6 bg-[#F9F9F9]">
                     <div className="max-w-6xl mx-auto">
                     <div className="flex flex-col items-center gap-6 mb-12">
-                        <h2 className="text-lg font-light tracking-widest text-slate-700">精選範例</h2>
+                        <h2 className="text-lg font-medium tracking-widest text-slate-700">精選範例</h2>
                         
                         <div className="flex p-1 bg-slate-100 rounded-full">
                             {portfolioCategories.map((cat) => (
@@ -432,11 +529,18 @@
                                 
                                 return itemsToRender.map((itemContent, imgIndex) => {
                                 const colorClass = getColorClass(subItem.colorTone, imgIndex);
-                                const widthClass = "min-w-[200px] w-[200px]";
+                                let widthClass = subItem.widthClass || "min-w-[200px] w-[200px]";
+                                
                                 const imageUrl = hasImages ? itemContent : null;
+                                
+                                let heightClass = subItem.heightClass || "h-48";
+                                
+                                if (subItem.title === '正比半身' && imgIndex === itemsToRender.length - 1) {
+                                    widthClass = "min-w-[400px] w-[400px]"; 
+                                }
 
                                 return (
-                                    <div key={imgIndex} className={`${widthClass} h-48 snap-center flex-shrink-0`}>
+                                    <div key={imgIndex} className={`${widthClass} ${heightClass} snap-center flex-shrink-0`}>
                                     <ArtItem 
                                         color={colorClass} 
                                         text={subItem.title} 
@@ -454,10 +558,10 @@
                     </div>
                 </section>
 
-                {/* 4. 價目表 */}
+                {/* 4. 價目表 (Pricing) */}
                 <section id="pricing" className="py-20 px-6 max-w-5xl mx-auto bg-white">
                     <div className="flex items-center gap-3 mb-12 justify-center">
-                    <h2 className="text-lg font-light tracking-widest text-slate-700">委託項目</h2>
+                    <h2 className="text-lg font-medium tracking-widest text-slate-700">委託項目</h2>
                     </div>
                     
                     <div className="space-y-16">
@@ -500,11 +604,11 @@
                     </div>
                 </section>
 
-                {/* 5. 排單狀態 */}
+                {/* 5. 排單狀態 (Status) */}
                 <section id="status" className="py-20 px-6 max-w-4xl mx-auto">
                     <div className="flex items-center gap-3 mb-8 justify-center relative">
                     <div className="h-px w-8 bg-slate-300"></div>
-                    <h2 className="text-lg font-light tracking-widest text-slate-700">目前狀態</h2>
+                    <h2 className="text-lg font-medium tracking-widest text-slate-700">目前狀態</h2>
                     <div className="h-px w-8 bg-slate-300"></div>
                     
                     <button 
@@ -565,8 +669,11 @@
                             </span>
                         ) : (
                             <span className="text-slate-400 flex items-center gap-1">
-                            <CheckCircle2 size={10} className="text-[#7A9089]" /> 
-                            {SHEET_CSV_URL ? "資料已同步自雲端" : "僅顯示範例資料"}
+                            {SHEET_CSV_URL ? (
+                                <>
+                                <CheckCircle2 size={10} className="text-[#7A9089]" /> 資料已同步自雲端
+                                </>
+                            ) : "僅顯示範例資料"}
                             </span>
                         )}
                         </div>
@@ -574,7 +681,39 @@
                     </div>
                 </section>
 
-                {/* Footer */}
+                {/* 6. 注意事項 (Terms) */}
+                <section id="terms" className="py-20 px-6 bg-[#F5F7F8]">
+                    <div className="max-w-2xl mx-auto bg-white/60 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white">
+                    <div className="text-center mb-10">
+                        <h2 className="text-lg font-medium tracking-widest text-slate-700">注意事項</h2>
+                        <p className="text-[10px] text-slate-500 mt-2">委託前請務必詳閱以下內容</p>
+                    </div>
+                    <div className="space-y-6">
+                        <div className="flex gap-4">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#E5EBE9] flex items-center justify-center text-[#6F827D] mt-1"><CheckCircle2 size={14} /></div>
+                        <div>
+                            <h4 className="text-xs font-medium text-slate-700 tracking-wider mb-1">關於修改</h4>
+                            <p className="text-[11px] text-slate-500 leading-relaxed font-light">草稿階段可免費修改 2 次，線稿與完稿階段僅接受設定錯誤之修正。大幅度修改需視情況加收費用。</p>
+                        </div>
+                        </div>
+                        <div className="flex gap-4">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#E6EBF0] flex items-center justify-center text-[#7A8C99] mt-1"><FileText size={14} /></div>
+                        <div>
+                            <h4 className="text-xs font-medium text-slate-700 tracking-wider mb-1">授權範圍</h4>
+                            <p className="text-[11px] text-slate-500 leading-relaxed font-light">委託價格默認為「非商業委託」，可個人收藏、印製少量無料。若需商用（販售、收益化影片等）請事先告知，價格 x 2.5 倍。</p>
+                        </div>
+                        </div>
+                        <div className="flex gap-4">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#EBE6E6] flex items-center justify-center text-[#997A7A] mt-1"><AlertCircle size={14} /></div>
+                        <div>
+                            <h4 className="text-xs font-medium text-slate-700 tracking-wider mb-1">付款方式</h4>
+                            <p className="text-[11px] text-slate-500 leading-relaxed font-light">確認草稿無誤後須先支付全額款項，收到款項後才會繼續進行繪製。支援轉帳與 PayPal。</p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+
                 <footer className="py-10 px-6 text-center text-[10px] text-slate-400 tracking-widest font-light">
                     © 2023 Hoshino Art. All rights reserved.<br/>
                     Designed with <Heart size={10} className="inline mx-1 text-slate-400" /> by You
@@ -583,7 +722,6 @@
             );
         }
 
-        // 3. 渲染到頁面
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<ArtistPortfolio />);
     </script>
